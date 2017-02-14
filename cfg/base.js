@@ -9,12 +9,13 @@ let defaultSettings = require('./defaults');
 // let npmBase = path.join(__dirname, '../node_modules');
 // let additionalPaths = [ path.join(npmBase, 'react-bootstrap') ];
 let additionalPaths = [];
-let componentsPath = path.join(__dirname, '/../src/components');
-let files = glob.sync(path.join(componentsPath, '/*/index.js'));
+let appPath = path.join(__dirname, '/../src/apps');
+let files = glob.sync(path.join(appPath, '/*.js'));
 let entries = {};
-let regula = new RegExp('.*\/components\/(.*?)\/index\.js');
+let regula = new RegExp('.*\/apps\/(.*)\.js');
 files.forEach(function(fPathName){
     var names = regula.exec(fPathName);
+    console.dir(names);
     entries[names[1]] = fPathName;
 });
 
@@ -26,7 +27,7 @@ module.exports = {
     entry: entries,
     output: {
         path: path.join(__dirname, '/../dist' + defaultSettings.publicPath),
-        filename: '[name]/app.js',
+        filename: '[name].bundle.js',
         publicPath: defaultSettings.publicPath
     },
     devServer: {
