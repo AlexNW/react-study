@@ -29,7 +29,7 @@ module.exports = {
     devtool: 'eval',
     entry: entries,
     output: {
-        path: path.join(__dirname, '/../dist' + defaultSettings.publicPath),
+        path: path.join(__dirname, '/../dist/' + defaultSettings.publicPath),
         filename: '[name].bundle.js',
         publicPath: defaultSettings.publicPath,
         library: 'myLib'

@@ -5,6 +5,8 @@ import fetch from 'isomorphic-fetch';
 require('styles/debugHelper/main.scss');
 require('font-awesome/scss/font-awesome.scss');
 
+let baseFetchParam = {credentials: 'include'};
+
 function dataFormat(date) {
     var o = {
         'y' : date.getFullYear(),
@@ -68,11 +70,12 @@ class DownloadPanel extends React.Component{
                             + '&content=' + JSON.stringify(selectData);
 
         this.setState((downType === 'wav') ? {wavState:'打包中'} : {logState:'打包中'});
-        fetch('/uidQuery/download', {method:'POST',
+        fetch('uidQuery/download', {method:'POST',
                                     headers: {
                                         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
                                     },
-                                    body:postData})
+                                    body:postData,
+                                    credentials: 'include'})
             .then(response=>{
                 return response.text();
             })
@@ -178,7 +181,7 @@ class DataViewItem extends React.Component {
         }
         voiceSpan.innerHTML= 'Loading';
 
-        fetch('uidQuery/play?sid=' + this.props.dataItem.sid)
+        fetch('uidQuery/play?sid=' + this.props.dataItem.sid, baseFetchParam)
         .then(response=>{
             return response.json();
         })
@@ -222,7 +225,7 @@ class DataViewItem extends React.Component {
 
     nlpQuery(e){
         this.setState({nlpState:'query'});
-        fetch('/uidQuery/nlp?sid=' + this.props.dataItem.sid).then(response=>{
+        fetch('uidQuery/nlp?sid=' + this.props.dataItem.sid, baseFetchParam).then(response=>{
             if(response.ok){
                 return response.json();
             }
@@ -239,7 +242,7 @@ class DataViewItem extends React.Component {
 
     performanceQuery(e){
         this.setState({perf:'查询中'});
-        fetch('/sid/performance?sid=' + this.props.dataItem.sid).then(response=>{
+        fetch('sid/performance?sid=' + this.props.dataItem.sid, baseFetchParam).then(response=>{
             return response.json();
         })
         .then(json=>{
@@ -410,7 +413,7 @@ class QueryBar extends React.Component{
     }
 
     query(){
-        let queryUrl = '/query';
+        let queryUrl = 'query';
         let queryTip = '';
         if(this.state.sid){
             queryUrl = queryUrl + '?sid=' + this.state.sid;
@@ -421,7 +424,7 @@ class QueryBar extends React.Component{
             queryTip = '查询 uid [' + this.state.uid + '], ';
         }
         this.props.sendAction({type:'tipChange', value:queryTip + '请稍等...'});
-        fetch(queryUrl).then(response=>{
+        fetch(queryUrl, baseFetchParam).then(response=>{
             return response.json();
         })
         .then(result=>{
