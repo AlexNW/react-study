@@ -1,6 +1,18 @@
+$mainWidth: 1100px;
+$mainMarginLeft: 100px;
+$border-color:transparent;
+$table-head-bg-color:#A6E08D;
+$mainColor : #452595;
+$header-height : 50px;
+
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+}
+
+input:not([type="image"]), textarea {
+    box-sizing: border-box;
+    outline: none
 }
 
 #header {
@@ -10,3 +22,257 @@ body {
   line-height: 50px;
   padding-left: 20px;
 }
+
+#query-form {
+    width: $mainWidth;
+    margin-left: $mainMarginLeft;
+    margin-top: 10px;
+
+    div {
+        display: inline-block;
+        margin-left: 5px;
+        input[type='text'] {
+            padding: 2px 10px;
+            height: 30px;
+            border-radius: 5px;
+            border: solid 1px $mainColor;
+            box-shadow: $mainColor 0px 0px 3px;
+        }
+        input[name='sid'] {
+            width: 240px;
+            margin-left: 10px;
+        }
+
+        input:focus {
+            box-shadow: $mainColor 0px 0px 6px;
+        }
+        div {
+            vertical-align: top;
+        }
+    }
+    button {
+        border: solid 1px $mainColor;
+        border-radius: 5px;
+        background-color: $mainColor;
+        margin-left: 20px;
+        height: 30px;
+        padding: 2px 10px;
+        text-align: center;
+        color: white;
+        box-shadow: $mainColor 0px 0px 3px;
+        vertical-align: bottom;
+    }
+    button:hover {
+        box-shadow: $mainColor 0px 0px 10px;
+    }
+    button:active {
+        background-color: $mainColor + #114040;
+        box-shadow: $mainColor+#114040 0px 0px 10px;
+    }
+}
+
+#query-tip {
+    margin-left: $mainMarginLeft + 10px;
+    margin-top: 20px;
+}
+
+#result-body {
+    min-width: 700px;
+    margin-left: $mainMarginLeft + 10px;
+    margin-bottom: 100px;
+    tr {
+        .result {
+            width: 120px;
+            padding: 5px 5px;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+        th.result {
+            height: 36px;
+            padding: 2px 5px;
+            line-height: 40px;
+            text-align: center;
+            border: solid 1px $border-color;
+            border-top: solid 2px $border-color;
+            border-bottom: solid 2px $border-color;
+            background-color: $table-head-bg-color;
+        }
+        .result.result-select{
+            width: 40px;
+            text-align: center;
+        }
+        .result.result-sid {
+            width: 165px;
+        }
+        .result.result-text {
+            width: 200px;
+            .result-text-refresh{
+                width: 100%;
+                text-align: center;
+                cursor: pointer;
+            }
+            .result-text-refresh:hover{
+                color: #852595;
+            }
+            .result-text-refresh.fa-hourglass-half{
+                color: #A6808D;
+                cursor: auto;
+            }
+
+
+        }
+        .result.result-time {
+            width: 165px;
+        }
+        .result.result-voice,
+        .result.result-nlp{
+            width: 90px;
+            text-align: center;
+            span{
+                color: lightgrey;
+            }
+            span.has-data{
+                cursor: pointer;
+                color: blueviolet;
+            }
+            span.has-data:hover{
+                color: blue;
+            }
+        }
+        .result.result-nlp{
+            width: 150px;
+            border-right: solid $border-color 2px;
+
+            span.nlp-focus{
+                display: inline-block;
+                border-radius: 3px;
+                border: solid 1px #BFBBAF;
+                background-color: #e7f4f5;
+                color: black;
+                margin-left: 2px;
+                margin-top: 2px;
+                padding: 1px 4px;
+            }
+            span.nlp-focus:hover{
+                background-color: #A6E08D;
+            }
+        }
+        .result.result-ip {
+            text-align: center;
+            span{
+                cursor: pointer;
+                color: blueviolet;
+            }
+            .perf-result {
+                text-align:left;
+                font-size:14px;
+            }
+        }
+    }
+    tr.even {
+        background-color: #C3BEB7;
+    }
+    tr.odd {
+        background-color: #7284A5;
+    }
+}
+
+#nlp-shower{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 400px;
+    min-height: 200px;
+    box-shadow: #BFBBAF 0px 0px 4px;
+    background-color: #a4b6cc;
+
+    .close-btn{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        float: right;
+        margin-right: 3px;
+        margin-top: 3px;
+        background-color: #452595;
+        color: red;
+        border-radius: 10px;
+        padding: 3px;
+
+        i {
+            display: inline-block;
+            vertical-align: text-top;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+        }
+    }
+    .close-btn:hover{
+        background-color: #2565B5;
+    }
+
+    .shower{
+        margin: 20px 5px 5px 5px;
+        *{
+            display: block;
+            padding: 1px 1px 1px 16px;
+            border: solid 1px #114040;
+            margin: 2px;
+        }
+
+        .nlp-tag{
+            display: inline-block;
+            border: none;
+            background-color: #A6E08D;
+            border-radius: 3px;
+            padding: 1px 3px;
+            margin-left: -14px;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+    }
+}
+
+#download-panel{
+    position: fixed;
+    width: $mainMarginLeft - 20px;
+    margin-left: 10px;
+    top: $header-height + 80px;
+    font-size: 14px;
+    div.d-operate{
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        vertical-align: middle;
+        margin: 1px;
+        background-color: #A6E08D;
+        cursor: pointer;
+    }
+    div.d-operate.downloading,
+    div.d-operate.downloading:hover{
+        background-color: #5665d5;
+        color: #a4b6cc;
+        cursor: auto;
+    }
+    div.d-operate:hover{
+        background-color: #2565B5;
+        color: white;
+    }
+    div.d-state{
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 10px;
+        background-color: #A6E08D;
+
+    }
+    div.d-state.up{
+        margin: 1px 1px -1px 1px;
+        border-radius: 5px 5px 0px 0px;
+    }
+    div.d-state.down{
+        margin: -1px 1px 1px 1px;
+        border-radius: 0px 0px 5px 5px;
+    }
+}
+

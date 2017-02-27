@@ -19,6 +19,9 @@ files.forEach(function(fPathName){
     entries[names[1]] = fPathName;
 });
 
+// let remoteHost = 'https://x.yuyin.tv/zhidao';
+let remoteHost = 'http://localhost:8080';
+
 module.exports = {
     additionalPaths: additionalPaths,
     port: defaultSettings.port,
@@ -28,7 +31,8 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/../dist' + defaultSettings.publicPath),
         filename: '[name].bundle.js',
-        publicPath: defaultSettings.publicPath
+        publicPath: defaultSettings.publicPath,
+        library: 'myLib'
     },
     devServer: {
         contentBase: './src/',
@@ -36,7 +40,29 @@ module.exports = {
         hot: true,
         port: defaultSettings.port,
         publicPath: defaultSettings.publicPath,
-        noInfo: false
+        noInfo: false,
+        proxy : {
+                '/uidQuery': {
+                    target:remoteHost,
+                    secure: false,
+                    changeOrigin: true,
+                },
+                '/query' : {
+                    target:remoteHost,
+                    secure: false,
+                    changeOrigin: true,
+                },
+                '/file_download' :{
+                    target:remoteHost,
+                    secure: false,
+                    changeOrigin: true,
+                },
+                '/sid' :{
+                    target:remoteHost,
+                    secure: false,
+                    changeOrigin: true,
+                }
+            }
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],

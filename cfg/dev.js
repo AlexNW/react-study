@@ -26,10 +26,6 @@ let config = Object.assign({}, baseConfig, {
   module: defaultSettings.getDefaultModules()
 });
 
-config.output.library = 'myLib';
-config.output.libraryTarget = 'var';
-
-
 // Add needed loaders to the defaults here
 config.module.loaders.push({  test: /\.(js|jsx)$/,
   loader: 'react-hot!babel-loader',

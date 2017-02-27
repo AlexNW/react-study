@@ -23,6 +23,7 @@ function getDefaultModules() {
         loader: 'eslint-loader'
       }
     ],
+    noParse: [],
     loaders: [
       {
         test: /\.css$/,
@@ -45,8 +46,12 @@ function getDefaultModules() {
         loader: 'style-loader!css-loader!stylus-loader'
       },
       {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url-loader?limit=8192'
+      },
+      {
+        test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
+        loader: 'url-loader?limit=50000&name=font/[name].[ext]'
       },
       {
         test: /\.(mp4|ogg|svg)$/,
