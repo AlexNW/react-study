@@ -66,8 +66,8 @@ class DownloadPanel extends React.Component{
             return;
         }
         let downType = item.attributes['type'].nodeValue;
-        var postData = 'what=' + downType
-                            + '&content=' + JSON.stringify(selectData);
+        var postData = encodeURI('what=' + downType
+                            + '&content=' + JSON.stringify(selectData));
 
         this.setState((downType === 'wav') ? {wavState:'打包中'} : {logState:'打包中'});
         fetch('uidQuery/download', {method:'POST',

@@ -84,16 +84,6 @@ function method2(src){
 // console.log(src.length + ' elements, src [' + src + ']');
 // console.log(dst.length + ' collection, dst [' + dst + '], ');
 
-
-let postBody = {what: "log", content: [{sid: "iat183df5ff@gz015c0bf728243c3e00", text: "最强"}]}
-fetch("https://x.yuyin.tv/zhidao/uidQuery/download", {method:'POST', body:JSON.stringify(postBody)}).then(response=>{
-    return response.text();
-})
-.then(data=>{
-    console.log(data);
-})
-.catch(e=>{
-    console.log(e);
-})
-
+var haha = encodeURI("wav%wav你好");
+console.log("--->" + haha);
 
